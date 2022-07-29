@@ -7,7 +7,16 @@ task.sync()
 
 rout.post("/register", async (req, res) => {
 
-    const { names, email, password, designation, admin } = req.body
+const { names, email, password, designation, admin } = req.body
+    const check = await task.findOne({where:{email : email}})
+    if(check){
+        res.json(
+            "email already exist...!"
+        )
+    }
+    else{
+
+           
     const reg = await new task({
         names,
         email,
@@ -28,6 +37,9 @@ rout.post("/register", async (req, res) => {
             status: "false"
         })
     })
+    }
+
+ 
 
 })
 
