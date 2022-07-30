@@ -81,12 +81,14 @@ rout.get("/users", async (req, res) => {
 
 })
 
-rout.post("/update", async (req, res) => {
+rout.post("/update", upload.single("profile"),async (req, res) => {
     const data = {
         names: req.body.names,
         email: req.body.email,
         password: req.body.password,
         designation: req.body.designation,
+        admin : req.body.admin
+        profile : req.file.originalname
     }
     const up = await task.update(data, { where: { id: req.body.id } })
 
