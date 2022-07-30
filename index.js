@@ -4,7 +4,7 @@ const app = express()
 const rout = require("./routs")
 const bodyparser =require("body-parser");
 
-
+app.use(express.static("./photos"))
 app.use(cors())
 app.use(bodyparser.urlencoded({extended:false}))
 app.use(bodyparser.json())
