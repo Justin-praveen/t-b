@@ -1,7 +1,7 @@
 const {DataTypes} = require("sequelize");
 const seq = require("./db")
 
-  const task = seq.define("employe",{
+  const task = seq.define("employee",{
     names : {
       type : DataTypes.STRING
     },
@@ -16,8 +16,11 @@ const seq = require("./db")
     },
     admin : {
       type :DataTypes.STRING
-    } 
-    })
+    },
+    profile : {
+      type : DataTypes.STRING
+    }
+    )
 
 module.exports = task
   
