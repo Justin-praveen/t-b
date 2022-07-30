@@ -1,11 +1,20 @@
 const express = require("express");
-
+const multer = require("multer")
 const rout = express.Router()
 const task = require("./model");
 
 task.sync()
 
-rout.post("/register", async (req, res) => {
+const store = multer.diskStorage({
+    destination : (req,file,cb)=>{
+        cb(null,"./photos")
+    },
+    filename : (req,file,clb)=>{
+        clb(null,file.originalname);
+    }
+})
+
+rout.post("/register",upload.single("profile"), async (req, res) => {
 
 const { names, email, password, designation, admin } = req.body
     const check = await task.findOne({where:{email : email}})
@@ -22,7 +31,8 @@ const { names, email, password, designation, admin } = req.body
         email,
         password,
         designation,
-        admin
+        admin,
+        profile : req.file.originalname
     })
 
     reg.save().then((da) => {
